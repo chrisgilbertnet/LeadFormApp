@@ -27,5 +27,7 @@ namespace LeadFormApp.Infrastructure
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Author> Authors { get; set; }
+
+        public virtual DbSet<Contact> Contacts { get; set; }
     }
 }

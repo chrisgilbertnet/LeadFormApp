@@ -55,6 +55,8 @@
     <Compile Include="AuthorServices\IAuthorService.cs" />
     <Compile Include="BlogServices\BlogService.cs" />
     <Compile Include="BlogServices\IBlogService.cs" />
+    <Compile Include="ContactServices\ContactService.cs" />
+    <Compile Include="ContactServices\IContactService.cs" />
     <Compile Include="DIModule.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -4,50 +4,50 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LeadFormApp.Domain.Entities;
-using LeadFormApp.Services.BlogServices;
+using LeadFormApp.Services.ContactServices;
 
 namespace LeadFormApp.Presentation.Controllers
 {
-    public class BlogController : Controller
+    public class ContactController : Controller
     {
-        private readonly IBlogService _blogService;
+        private readonly IContactService _contactService;
 
-        public BlogController(IBlogService blogService)
+        public ContactController(IContactService contactService)
         {
-            _blogService = blogService;
+            _contactService = contactService;
         }
 
-        // GET: Blog
+        // GET: Contact
         public ActionResult Index()
         {
-            return View(_blogService.GetBlogs());
+            return View(_contactService.GetContacts());
         }
 
-        // GET: Blog/Details/5
+        // GET: Contact/Details/5
         public ActionResult Details(int id)
         {
-            return View(_blogService.Find(id));
+            return View(_contactService.Find(id));
         }
 
-        // GET: Blog/Create
+        // GET: Contact/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Blog/Create
+        // POST: Contact/Create
         [HttpPost]
-        public ActionResult Create(Blog model)
+        public ActionResult Create(Contact model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _blogService.Insert(model);
+                    _contactService.Insert(model);
                 }
                 else
                 {
-                    ModelState.AddModelError("","Error Creating blog");
+                    ModelState.AddModelError("","Error Creating Contact");
                     return View(model);
                 }
 
@@ -59,13 +59,13 @@ namespace LeadFormApp.Presentation.Controllers
             }
         }
 
-        // GET: Blog/Edit/5
+        // GET: Contact/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(_blogService.Find(id));
+            return View(_contactService.Find(id));
         }
 
-        // POST: Blog/Edit/5
+        // POST: Contact/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -81,13 +81,13 @@ namespace LeadFormApp.Presentation.Controllers
             }
         }
 
-        // GET: Blog/Delete/5
+        // GET: Contact/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Blog/Delete/5
+        // POST: Contact/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

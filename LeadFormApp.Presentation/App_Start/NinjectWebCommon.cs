@@ -10,7 +10,7 @@ namespace LeadFormApp.Presentation.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
-    using LeadFormApp.Services.BlogServices;
+    using LeadFormApp.Services.ContactServices;
 
     public static class NinjectWebCommon 
     {
@@ -64,7 +64,7 @@ namespace LeadFormApp.Presentation.App_Start
         {
             kernel.Load<Services.DIModule>();
 
-            kernel.Bind<IBlogService>().To<BlogService>();
+            kernel.Bind<IContactService>().To<ContactService>();
         }        
     }
 }
