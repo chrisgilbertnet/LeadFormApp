@@ -19,15 +19,12 @@ namespace LeadFormApp.Infrastructure
         public LeadFormAppDbContext()
             : base("name=LeadFormDbContext")
         {
-
+            //disable initializer to not do migrations
+            Database.SetInitializer<LeadFormAppDbContext>(null);
         }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
-        public virtual DbSet<Post> Posts { get; set; }
-        public virtual DbSet<Blog> Blogs { get; set; }
-        public virtual DbSet<Author> Authors { get; set; }
-
         public virtual DbSet<Contact> Contacts { get; set; }
     }
 }

@@ -20,6 +20,12 @@ namespace LeadFormApp.Presentation.Controllers
         // GET: Contact
         public ActionResult Index()
         {
+            return View();
+        }
+
+        // GET: Contact/Manage
+        public ActionResult Manage()
+        {
             return View(_contactService.GetContacts());
         }
 
