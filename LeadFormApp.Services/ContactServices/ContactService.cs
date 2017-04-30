@@ -1,5 +1,5 @@
 ﻿using LeadFormApp.Domain.Entities;
-using LeadFormApp.Domain.Interfaces;
+using LeadFormApp.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

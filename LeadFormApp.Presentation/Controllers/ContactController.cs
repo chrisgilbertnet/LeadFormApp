@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using LeadFormApp.Domain.Entities;
 using LeadFormApp.Services.ContactServices;
+using System.Text.RegularExpressions;
 
 namespace LeadFormApp.Presentation.Controllers
 {
@@ -49,6 +50,23 @@ namespace LeadFormApp.Presentation.Controllers
 
             try
             {
+                //Server side validation
+                if (!string.IsNullOrEmpty(model.Email))
+                {
+                    string emailRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+                                             @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+                                                @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+                    Regex re = new Regex(emailRegex);
+                    if (!re.IsMatch(model.Email))
+                    {
+                        ModelState.AddModelError("Email", "Email is not valid");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "Email is required");
+                }
+
                 if (ModelState.IsValid)
                 {
                     _contactService.Insert(model);
@@ -56,7 +74,7 @@ namespace LeadFormApp.Presentation.Controllers
                 }
                 else
                 {
-                    success = false;
+                    return View(model);
                 }
            }
             catch
@@ -81,7 +99,7 @@ namespace LeadFormApp.Presentation.Controllers
             {
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Manage");
             }
             catch
             {
@@ -93,7 +111,7 @@ namespace LeadFormApp.Presentation.Controllers
         public ActionResult Delete(int id)
         {
             _contactService.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Manage");
         }
 
         // POST: Contact/Delete/5
@@ -104,7 +122,7 @@ namespace LeadFormApp.Presentation.Controllers
             {
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Manage");
             }
             catch
             {

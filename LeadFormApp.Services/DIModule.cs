@@ -1,5 +1,5 @@
 ﻿using LeadFormApp.Domain.Entities;
-using LeadFormApp.Domain.Interfaces;
+using LeadFormApp.Infrastructure.Interfaces;
 using LeadFormApp.Infrastructure.Repositories;
 using Ninject.Modules;
 

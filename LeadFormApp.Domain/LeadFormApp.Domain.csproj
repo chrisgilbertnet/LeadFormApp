@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Contact.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Mapping\ContactMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

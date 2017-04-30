@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace LeadFormApp.Domain.Interfaces
+namespace LeadFormApp.Infrastructure.Interfaces
 {
     public interface IRepository<T> : IDisposable where T : class
     {
