@@ -45,24 +45,26 @@ namespace LeadFormApp.Presentation.Controllers
         [HttpPost]
         public ActionResult Create(Contact model)
         {
+            bool success = false;
+
             try
             {
                 if (ModelState.IsValid)
                 {
                     _contactService.Insert(model);
+                    success = true;
                 }
                 else
                 {
-                    ModelState.AddModelError("","Error Creating Contact");
-                    return View(model);
+                    success = false;
                 }
-
-                return RedirectToAction("Index");
-            }
+           }
             catch
             {
-                return View();
+                success = false;
             }
+
+            return PartialView("_SubmitMessage", success);
         }
 
         // GET: Contact/Edit/5
