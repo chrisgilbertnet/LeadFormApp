@@ -9,7 +9,7 @@ namespace LeadFormApp.Services
     {
         public override void Load()
         {
-            Bind<IRepository<Domain.Entities.Contact>>().To<Repository<Domain.Entities.Contact>>();
+            Bind<IRepository<Contact>>().To<Repository<Contact>>();
         }
     }
 }

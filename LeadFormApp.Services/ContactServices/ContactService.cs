@@ -17,11 +17,6 @@ namespace LeadFormApp.Services.ContactServices
             this._contactRepository = contactRepository;
         }
 
-        public void AddContact(Contact contact)
-        {
-            _contactRepository.Insert(contact);
-        }
-
         public IEnumerable<Contact> GetContacts()
         {
             return _contactRepository.GetAllNoTracking;
@@ -32,9 +27,14 @@ namespace LeadFormApp.Services.ContactServices
             return _contactRepository.GetById(id);
         }
 
-        public void Insert(Contact model)
+        public void Insert(Contact contact)
         {
-            _contactRepository.Insert(model);
+            _contactRepository.Insert(contact);
+        }
+
+        public void Delete(int id)
+        {
+            _contactRepository.Delete(id);
         }
     }
 }

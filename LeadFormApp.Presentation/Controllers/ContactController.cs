@@ -90,7 +90,8 @@ namespace LeadFormApp.Presentation.Controllers
         // GET: Contact/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            _contactService.Delete(id);
+            return RedirectToAction("Index");
         }
 
         // POST: Contact/Delete/5

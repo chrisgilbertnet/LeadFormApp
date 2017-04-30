@@ -9,12 +9,12 @@ namespace LeadFormApp.Services.ContactServices
 {
     public interface IContactService
     {
-        void AddContact(Contact contact);
-
         IEnumerable<Contact> GetContacts();
 
         Contact Find(int id);
 
         void Insert(Contact model);
+
+        void Delete(int id);
     }
 }

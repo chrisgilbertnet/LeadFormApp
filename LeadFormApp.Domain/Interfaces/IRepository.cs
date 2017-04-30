@@ -61,5 +61,4 @@ namespace LeadFormApp.Domain.Interfaces
         /// <returns>Entity</returns>
         T GetById(object id);
     }
-
 }

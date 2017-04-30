@@ -9,14 +9,13 @@ namespace LeadFormApp.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T: class
     {
-
         private readonly LeadFormAppDbContext _context;
         private IDbSet<T> _dbSet;
 
         public Repository(LeadFormAppDbContext context)
         {
             _context = context;
-            this._dbSet = _context.Set<T>();
+            _dbSet = _context.Set<T>();
         }
  
         protected virtual IDbSet<T> DbSet
@@ -29,11 +28,12 @@ namespace LeadFormApp.Infrastructure.Repositories
             try
             {
                 if (entity == null)
+                {
                     throw new ArgumentNullException("entity");
- 
-                this.DbSet.Add(entity);
- 
-                this._context.SaveChanges();
+                }
+
+                DbSet.Add(entity); 
+                _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -54,19 +54,21 @@ namespace LeadFormApp.Infrastructure.Repositories
             try
             {
                 if (entity == null)
+                {
                     throw new ArgumentNullException("entity");
+                }
 
                 if (_context.Entry(entity).State == EntityState.Detached)
+                {
                     DbSet.Attach(entity);
+                }
 
-                this.DbSet.Remove(entity);
- 
-                this._context.SaveChanges();
+                DbSet.Remove(entity);
+                _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
                 var fail = GenerateException(dbEx);
-                //Debug.WriteLine(fail.Message, fail);
                 throw fail;
             }
         }
@@ -76,17 +78,17 @@ namespace LeadFormApp.Infrastructure.Repositories
             try
             {
                 if (entity == null)
+                {
                     throw new ArgumentNullException("entity");
+                }
 
                 DbSet.Attach(entity);
                 _context.Entry(entity).State = EntityState.Modified;
-                
-                this._context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
                 var fail = GenerateException(dbEx);
-                //Debug.WriteLine(fail.Message, fail);
                 throw fail;
             }
         }
@@ -127,17 +129,20 @@ namespace LeadFormApp.Infrastructure.Repositories
         public virtual T GetById(object id)
         {
             return this.DbSet.Find(id);
-        }
- 
+        } 
  
         private static Exception GenerateException(DbEntityValidationException dbEx)
         {
             var msg = string.Empty;
- 
+
             foreach (var validationErrors in dbEx.EntityValidationErrors)
+            {
                 foreach (var validationError in validationErrors.ValidationErrors)
+                {
                     msg += Environment.NewLine +
                            string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                }
+            }
  
             var fail = new Exception(msg, dbEx);
             return fail;
@@ -146,14 +151,15 @@ namespace LeadFormApp.Infrastructure.Repositories
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     _context.Dispose();
                 }
             }
-            this.disposed = true;
+
+            disposed = true;
         }
  
         public void Dispose()
@@ -161,6 +167,5 @@ namespace LeadFormApp.Infrastructure.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
     }
 }
